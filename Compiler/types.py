@@ -1,3 +1,4 @@
+
 """
 This module defines all types availabe in high-level programs.  These
 include basic types such as secret integers or floating-point numbers
@@ -147,6 +148,9 @@ def vectorize(operation):
             if (isinstance(args[0], Tape.Register) or isinstance(args[0], sfloat)) \
                     and not isinstance(args[0], bits) \
                     and args[0].size != self.size:
+                print(self.size, args[0].size)
+                print(operation)
+                print(self)
                 raise CompilerError('Different vector sizes of operands')
         set_global_vector_size(self.size)
         res = operation(self, *args, **kwargs)
@@ -283,6 +287,9 @@ class _number(object):
 
     def reduce_after_mul(self):
         return self
+
+    def __neg__(self):
+        return -self
 
     def pow2(self, bit_length=None, security=None):
         return 2**self
@@ -1596,7 +1603,7 @@ class _secret(_register):
 
     @set_instruction_type
     @read_mem_value
-    @vectorize
+    # @vectorize
     def secret_op(self, other, s_inst, m_inst, si_inst, reverse=False):
         cls = self.__class__
         res = self.prep_res(other)
@@ -3073,7 +3080,9 @@ class _single(_number, _structure):
         """ Subtraction.
 
         :param other: appropriate public or secret (incl. sint/cint/regint/int) """
+        print(other)
         other = self.coerce(other)
+        print(other)
         return self + (-other)
 
     def __rsub__(self, other):

@@ -1,0 +1,206 @@
+# from __future__ import absolute_import, division, print_function, unicode_literals
+# WEBSITE CREDITS:
+# https://www.tensorflow.org/tutorials/quickstart/beginner
+# https://towardsdatascience.com/image-classification-in-10-minutes-with-mnist-dataset-54c35b77a38d
+
+#import PIL
+
+from __future__ import absolute_import, division, print_function, unicode_literals
+# import tensorflow as tf
+# import numpy as np
+cfix.set_precision(3,5)
+sfix.set_precision(3,5)
+
+from Compiler import ml
+# from Compiler.types import *
+
+#mnist = tf.keras.datasets.mnist
+
+#(x_train, y_train), (x_test, y_test) = mnist.load_data()
+x_train = MultiArray([2,1,784],sfix)
+# x_train[0][0]=1
+# x_train[1][0]=0
+@for_range_opt(784)
+def _(i):
+    for j in range(2):
+        x_train[j][i] = sfix.get_input_from(j)
+
+# x_train = np.array(x_train)
+y_train = Array(2, sfix)
+y_train[0] = cint(5)
+y_train[1] = cint(0)
+
+
+#type(x_train)
+
+import matplotlib.pyplot as plt
+# %matplotlib inline # Only use this if using iPython
+#image_index = 7777 # You may select anything up to 60,000
+#print(y_train[image_index]) # The label is 8
+#plt.imshow(x_train[image_index], cmap='Greys')
+
+# Data Formatting: making it AI friendly
+
+# Reshaping the array to 4-dims so that it can work with the Keras API
+# x_train = x_train.reshape(x_train.shape[0], 28, 28, 1)
+#x_test = x_test.reshape(x_test.shape[0], 28, 28, 1)
+# input_shape = (28, 28, 1)
+# Making sure that the values are float so that we can get decimal points after division
+# x_train = x_train.astype('float32')
+#x_test = x_test.astype('float32')
+# print(type(x_train))
+# Normalizing the RGB codes by dividing it to the max RGB value.
+# x_train /= 255
+#x_test /= 255
+# print('x_train shape:', x_train.shape)
+# print('Number of images in x_train', x_train.shape[0])
+#print('Number of images in x_test', x_test.shape[0])
+
+# x_train[0,0,0,0]=1
+import random
+# for i in range(x_train.shape[0]):
+#     for j in range(x_train.shape[1]):
+#         for k in range(x_train.shape[2]):
+#             for l in range(x_train.shape[3]):
+#                 if random.random()<0.5: continue
+#                 elif random.random()<0.5: x_train[i,j,k,l]=1
+#                 else: x_train[i,j,k,l]=0
+# for i in range(x_test.shape[0]):
+#     for j in range(x_test.shape[1]):
+#         for k in range(x_test.shape[2]):
+#             for l in range(x_test.shape[3]):
+#                 if random.random()<0.5: continue
+#                 elif random.random()<0.5: x_test[i,j,k,l]=1
+#                 else: x_test[i,j,k,l]=0
+
+# for i in range(x_train.shape[0]):
+#     for j in range(x_train.shape[1]):
+# WEBSITE CREDITS:
+# https://www.tensorflow.org/tutorials/quickstart/beginner
+# https://towardsdatascience.com/image-classification-in-10-minutes-with-mnist-dataset-54c35b77a38d
+
+#import PIL
+
+# from __future__ import absolute_import, division, print_function, unicode_literals
+# import tensorflow as tf
+# import numpy as np
+# from Compiler import ml
+
+#mnist = tf.keras.datasets.mnist
+
+#(x_train, y_train), (x_test, y_test) = mnist.load_data()
+# x_train = Matrix(2,1,sfix)
+# x_train[0][0]=1
+# x_train[1][0]=0
+# @for_range_opt(784)
+# def _(i):
+#     for j in range(1):
+#         x_train[j][i] = sfix.get_input_from(j)#         for k in range(x_train.shape[2]):
+#             for l in range(x_train.shape[3]):
+#                 if random.random()<0.5: continue
+#                 elif random.random()<0.5: continue
+#                 else: x_train[i,j,k,l]=1-x_train[i,j,k,l]
+# for i in range(x_test.shape[0]):
+#     for j in range(x_test.shape[1]):
+#         for k in range(x_test.shape[2]):
+#             for l in range(x_test.shape[3]):
+#                 if random.random()<0.5: continue
+#                 elif random.random()<0.5: continue
+#                 else: x_test[i,j,k,l]=1-x_train[i,j,k,l]
+
+
+# for i in range(x_train.shape[0]):
+#     for j in range(x_train.shape[1]):
+#         for k in range(x_train.shape[2]):
+#             for l in range(x_train.shape[3]):
+#                 if random.random()<0.5: continue
+#                 else: x_train[i,j,k,l]=random.random()
+# for i in range(x_test.shape[0]):
+#     for j in range(x_test.shape[1]):
+#         for k in range(x_test.shape[2]):
+#             for l in range(x_test.shape[3]):
+#                 if random.random()<0.5: continue
+#                 else: x_test[i,j,k,l]=random.random()
+
+
+# for i in range(x_train.shape[0]):
+#     for j in range(x_train.shape[1]):
+#         for k in range(x_train.shape[2]):
+#             for l in range(x_train.shape[3]):
+#                 if random.random()<0.5: continue
+#                 elif random.random()<0.5: x_train[i,j,k,l]+=random.random()*0.25
+#                 else: x_train[i,j,k,l]-=random.random()*0.25
+#for i in range(x_test.shape[0]):
+#    for j in range(x_test.shape[1]):
+#        for k in range(x_test.shape[2]):
+#            for l in range(x_test.shape[3]):
+#                if random.random()<0.5: continue
+#                elif random.random()<0.5: x_test[i,j,k,l]+=random.random()*0.25
+#                else: x_test[i,j,k,l]-=random.random()*0.25
+
+
+#x_train[0]
+
+# ML Library model
+dense = ml.Dense(2, 784, 1)
+layers = [dense, ml.Output(2, debug=False, approx='approx')]
+sgd = ml.SGD(layers, 1, debug=False, report_loss = True)
+sgd.layers[0].X = x_train
+sgd.layers[1].Y = y_train
+sgd.reset()
+#sgd.reset(x_train[0])
+# sgd.reset([x_train])
+sgd.run()
+
+
+# model = tf.keras.models.Sequential([
+#     tf.keras.layers.Conv2D(28, kernel_size=(3,3), input_shape=input_shape),
+#     tf.keras.layers.MaxPooling2D(pool_size=(2, 2)),
+#   tf.keras.layers.Flatten(),
+#   tf.keras.layers.Dense(128, activation='relu'),
+#     tf.keras.layers.Dropout(0.2),
+#   tf.keras.layers.Dense(128, activation='relu'),
+#   tf.keras.layers.Dropout(0.2),
+#   tf.keras.layers.Dense(10,activation=tf.nn.softmax)
+# ])
+
+# Broken code do not run
+# predictions = model(x_train[:1]).numpy()
+# predictions
+
+# loss_fn = tf.keras.losses.sparse_categorical_crossentropy(from_logits=True)
+# model.compile(optimizer='adam',
+#               loss='sparse_categorical_crossentropy',
+#               metrics=['accuracy'])
+              
+# history = model.fit(x_train, y_train, epochs=10)
+
+
+# Plot training & validation accuracy values
+# plt.plot(history.history['acc'])
+# plt.plot(history.history['val_acc'])
+# plt.title('Model accuracy')
+# plt.ylabel('Accuracy')
+# plt.xlabel('Epoch')
+# plt.legend(['Train', 'Test'], loc='upper left')
+# fig,ax = plt.subplots()
+# ax.plot(history.history['acc'], color="purple", marker="o")
+# ax.set_xlabel("Epoch",fontsize=14)
+
+# ax.set_ylabel("Accuracy",color="purple",fontsize=14)
+# plt.show()
+
+# Plot training & validation loss values
+
+# ax2 = ax.twinx()
+# ax2.plot(history.history['loss'],color="red",marker="o")
+# ax2.set_ylabel("Loss",color="red",fontsize=14)
+# plt.plot(history.history['loss'])
+# plt.plot(history.history['val_loss'])
+# plt.title('Model loss')
+# plt.ylabel('Loss')
+# plt.xlabel('Epoch')
+# plt.legend(['Train', 'Test'], loc='upper left')
+# plt.show()
+
+#model.evaluate(x_test,  y_test, verbose=2)

@@ -1336,8 +1336,10 @@ class SGD(Optimizer):
             @multithread(self.n_threads, len(nabla))
             def _(base, size):
                 old = delta_theta.get_vector(base, size)
-                red_old = self.momentum * old
+                print(old, delta_theta, self.momentum)
+                red_old = old.mul(self.momentum)
                 new = self.gamma * nabla.get_vector(base, size)
+                print('red_old', red_old, 'new', new)
                 diff = red_old - new
                 delta_theta.assign_vector(diff, base)
                 theta.assign_vector(theta.get_vector(base, size) +
